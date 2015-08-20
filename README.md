@@ -3,7 +3,18 @@ RandomFileTextGenerator
 
 This python script allow the user to create random text file(s) of specific sizes.
 --------------
-Usage:
+Usage :
+            
+    [-o output files, default file.txt separated by space ex. a.txt b.txt c.txt]
+    [-a <about, print about message>]
+    [-s <size in bytes, default 1024>]
+    [-c <file count, default 1>]
+    [-v <verbose, default False>]
+    [-h <help, print this usage message>]
+    [-r <replace all files>]
+
+Examples:
+
     python RandomFileTextGenerator.py -o "a.txt b.txt c.txt"
 *Will generate 3 files named, by default files will be named file.txt file1.txt ...*
 
