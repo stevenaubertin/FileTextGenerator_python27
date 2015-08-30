@@ -16,7 +16,7 @@ Usage :
 Examples:
 
     python RandomFileTextGenerator.py -o "a.txt b.txt c.txt"
-*Will generate 3 files named, by default files will be named file.txt file1.txt ...*
+*Will generate 3 files named, by default files will be 1024 bytes each.*
 
     python RandomFileTextGenerator.py -s 2048
 *To change the file size use -s by default the size is 1024 bytes*
