@@ -24,7 +24,7 @@ __copyright__ = "Copyright (C) All Rights Reserved 2015"
 __file__ = 'randomFileTextGenerator.py'
 __license__ = "Public Domain"
 __name__ = 'Random file text generator'
-__version__ = '2.1'
+__version__ = '2.2'
 
 import urllib2
 import os
@@ -48,13 +48,17 @@ def about():
             To use this program, you will need the library beautifulsoup4
             (pip install beautifulsoup4 or easy_install beautilfulsoup4)
 
-            -Update Steven Aubertin 03/01/2016
+            -Version 2.2, Steven Aubertin 03/01/2016
+                * REFACTO create function "get_web_content"
+                * ADD version number to updates info
+
+            -Version 2.1, Steven Aubertin 03/01/2016
                 * ADD Remi Carpentier <carpentieremi@hotmail.com> as source of inspiration
                 * FIX some typos
                 * FIX default program call (no argument)
                 * REFACTO some variables
 
-            -Update Steven Aubertin 06/29/2015
+            -Version 2.0, Steven Aubertin 06/29/2015
                 * FIX file(s) naming
                 * FIX files creation
                 * Fix proper file closing
@@ -138,6 +142,16 @@ def replace_existing_file(filename, params, MAX_TRY=3):
     return replace
 
 
+def get_web_content(url):
+    page = read_url(url)
+    soup = BeautifulSoup(page)
+    text = soup.find('textarea').text
+    try:
+        return str(text)
+    except:
+        return text.encode('utf-8')
+
+
 def create_files(params):
     files = create_filenames(params)
 
@@ -160,13 +174,7 @@ def create_files(params):
             with open(filename, "a") as text_file:
                 size = os.stat(filename).st_size
                 while size < params["size"]:
-                    page = read_url(params["url"])
-                    soup = BeautifulSoup(page)
-                    text = soup.find('textarea').text
-                    try:
-                        content = str(text)
-                    except:
-                        content = text.encode('utf-8')
+                    content = get_web_content(params["url"])
                     i = 0
                     while size < params["size"]:
                         if i < len(content):
