@@ -24,7 +24,7 @@ __copyright__ = "Copyright (C) All Rights Reserved 2015"
 __file__ = 'randomFileTextGenerator.py'
 __license__ = "Public Domain"
 __name__ = 'Random file text generator'
-__version__ = '2.2'
+__version__ = '2.2.1'
 
 import urllib2
 import os
@@ -45,12 +45,14 @@ def about():
             To use this program, you will need the library beautifulsoup4
             (pip install beautifulsoup4 or easy_install beautilfulsoup4)
 
+            -Version 2.2.1 Steven Aubertin 03/01/2016
+                * FIX some comments
+
             -Version 2.2, Steven Aubertin 03/01/2016
                 * REFACTO create function "get_web_content"
                 * ADD version number to updates info
 
             -Version 2.1, Steven Aubertin 03/01/2016
-                * ADD Remi Carpentier <carpentieremi@hotmail.com> as source of inspiration
                 * FIX some typos
                 * FIX default program call (no argument)
                 * REFACTO some variables
