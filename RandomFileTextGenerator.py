@@ -24,7 +24,7 @@ __copyright__ = "Copyright (C) All Rights Reserved 2015"
 __file__ = 'randomFileTextGenerator.py'
 __license__ = "Public Domain"
 __name__ = 'Random file text generator'
-__version__ = '2.0'
+__version__ = '2.1'
 
 import urllib2
 import os
@@ -41,18 +41,27 @@ def about():
             This is free software, and you are welcome to redistribute it
             under certain conditions;
             For more details, visit http://www.gnu.org/licenses/
+
+            Inspired from Remi Carpentier <carpentieremi@hotmail.com> for the idea.
+
             IMPORTANT :
             To use this program, you will need the library beautifulsoup4
             (pip install beautifulsoup4 or easy_install beautilfulsoup4)
 
+            -Update Steven Aubertin 03/01/2016
+                * ADD Remi Carpentier <carpentieremi@hotmail.com> as source of inspiration
+                * FIX some typos
+                * FIX default program call (no argument)
+                * REFACTO some variables
+
             -Update Steven Aubertin 06/29/2015
-                * Fix file(s) naming
+                * FIX file(s) naming
                 * FIX files creation
                 * Fix proper file closing
-                * Fix file size
+                * FIX file size
                 * FIX encoding errors
-                * Add arguments options
-                * Add return code
+                * ADD arguments options
+                * ADD return code
         """.format(sys.argv[0])
 
 
@@ -73,19 +82,17 @@ def print_usage():
 
 def read_url(url):
     if url:
-        reader_resp_content = None
-
-        reader_req = urllib2.Request(url)
-        with contextlib.closing(urllib2.urlopen(reader_req)) as reader_resp:
-            reader_resp_content = reader_resp.read()
+        content = None
+        with contextlib.closing(urllib2.urlopen(urllib2.Request(url))) as r:
+            content = r.read()
 
         try:
-            return reader_resp_content.decode('utf-8')
+            return content.decode('utf-8')
         except:
             pass
 
         try:
-            iso_string = reader_resp_content.decode('iso-8859-1')
+            iso_string = content.decode('iso-8859-1')
             print 'UTF-8 decoding failed, but ISO-8859-1 decoding succeeded'
             return iso_string
         except Exception, e:
@@ -102,7 +109,7 @@ def create_filenames(params):
 
     if file_counts < count:
         j = 0
-        for i in xrange(0, count-file_counts):
+        for i in xrange(count - file_counts):
             index = i % file_counts
             if index == 0:
                 j += 1
@@ -115,7 +122,7 @@ def create_filenames(params):
 def replace_existing_file(filename, params, MAX_TRY=3):
     replace = False
 
-    for i in xrange(0, MAX_TRY):
+    for i in xrange(MAX_TRY):
         try:
             user_input = str(raw_input("File {0} already exists would you like to replace? [y/n]".format(filename))).lower()
             if user_input == 'y':
@@ -197,11 +204,6 @@ def main(argv):
     except getopt.GetoptError:
         print_usage()
         return 2
-
-    if len(opts) == 0:
-        about()
-        print_usage()
-        return 0
 
     for opt, arg in opts:
         if opt == '-h':
