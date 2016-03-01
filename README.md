@@ -19,13 +19,13 @@ Examples:
 *Will generate 3 files named, by default files will be 1024 bytes each.*
 
     python RandomFileTextGenerator.py -s 2048
-*To change the file size use -s by default the size is 1024 bytes*
+*To change the file(s) size use -s by default the size is 1024 bytes*
 
     python RandomFileTextGenerator.py -r
-*To remplace existing file(s) use -r*
+*To replace existing file(s) use -r*
 
     python RandomFileTextGenerator.py -c 666
-*Will generate 666 files of the default name [file.txt,..., file665.txt] of the default (1024 bytes) size*
+*Will generate 666 files with default names [file.txt,..., file665.txt] of the default (1024 bytes) size*
 
     python RandomFileTextGenerator.py -o "a.txt b.txt c.txt" -c 5 -s 1024 -r
 *Will replace any existing file (with the same name) and create 1ko (1024 bytes) files wich will be named “a.txt a1.txt b.txt b1.txt c.txt"*
